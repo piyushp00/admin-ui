@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import UsersNew from "./components/UsersNew";
+import UsersNew from "./components/Users";
 export default {
   name: "App",
   components: {
