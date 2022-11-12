@@ -89,7 +89,12 @@
   </div>
   <div class="d-flex justify-content-between mt-2 mb-2">
     <div>
-      <button type="button" class="btn btn-danger" @click="deleteSelectedUsers">
+      <button
+        type="button"
+        class="btn btn-danger"
+        @click="deleteSelectedUsers"
+        :disabled="selectedUser.length == 0"
+      >
         Delete Selected
       </button>
     </div>
@@ -158,15 +163,12 @@ export default {
     onPageChange(page) {
       console.log("page changed", page);
       this.currentPage = page;
-      // this.allSelected = !this.allSelected;
+      if(this.currentPage !== page){
+        this.allSelected = false;
+      }
     },
     onClickCheckbox(user) {
       user.selected = !user.selected;
-      if (user.selected) {
-        console.log("selected == true", user);
-      } else {
-        console.log("unselected == false", user);
-      }
     },
     deleteSelectedUsers() {
       this.paginatedData.forEach((user) => {
@@ -188,6 +190,7 @@ export default {
     searchTable() {
       let searchBar = document.getElementById("searchBar");
       searchBar.addEventListener("keyup", this.filteredData);
+      this.currentPage = 1;
     },
   },
   computed: {
